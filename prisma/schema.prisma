@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model comments {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  post_id    Int
+  content    String    @db.Text
+  created_at DateTime  @default(now()) @db.Timestamp(0)
+  users      users     @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "comments_ibfk_1")
+  posts      posts     @relation(fields: [post_id], references: [id], onUpdate: Restrict, map: "comments_ibfk_2")
+  replies    replies[]
+
+  @@index([post_id], map: "post_id")
+  @@index([user_id], map: "user_id")
+}
+
+model likes {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  post_id    Int
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  users      users    @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "likes_ibfk_1")
+  posts      posts    @relation(fields: [post_id], references: [id], onUpdate: Restrict, map: "likes_ibfk_2")
+
+  @@index([post_id], map: "post_id")
+  @@index([user_id], map: "user_id")
+}
+
+model posts {
+  id         Int        @id @default(autoincrement())
+  user_id    Int
+  content    String     @db.Text
+  image_url  String?    @db.VarChar(255)
+  topic_id   Int?
+  created_at DateTime   @default(now()) @db.Timestamp(0)
+  updated_at DateTime   @default(now()) @db.Timestamp(0)
+  comments   comments[]
+  likes      likes[]
+  users      users      @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "posts_ibfk_1")
+  topics     topics?    @relation(fields: [topic_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "posts_ibfk_2")
+
+  @@index([topic_id], map: "topic_id")
+  @@index([user_id], map: "user_id")
+}
+
+model replies {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  comment_id Int
+  content    String   @db.Text
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  users      users    @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "replies_ibfk_1")
+  comments   comments @relation(fields: [comment_id], references: [id], onUpdate: Restrict, map: "replies_ibfk_2")
+
+  @@index([comment_id], map: "comment_id")
+  @@index([user_id], map: "user_id")
+}
+
+model topics {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique(map: "name") @db.VarChar(255)
+  posts posts[]
+}
+
+model users {
+  id                Int        @id @default(autoincrement())
+  username          String     @unique(map: "username") @db.VarChar(255)
+  email             String     @unique(map: "email") @db.VarChar(255)
+  password_hash     String     @db.VarChar(255)
+  profile_image_url String?    @db.VarChar(255)
+  created_at        DateTime   @default(now()) @db.Timestamp(0)
+  updated_at        DateTime   @default(now()) @db.Timestamp(0)
+  comments          comments[]
+  likes             likes[]
+  posts             posts[]
+  replies           replies[]
+}
