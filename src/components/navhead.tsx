@@ -1,7 +1,7 @@
-"use client";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+'use client';
+import Link from 'next/link';
+import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
 
 export default function Navhead() {
   const router = useRouter();
@@ -14,15 +14,10 @@ export default function Navhead() {
         </Link>
       </div>
       <div className="flex gap-x-4">
-        <Button
-          variant={"outline"}
-          onClick={() => router.push("api/auth/signin")}
-        >
+        <Button variant={'outline'} onClick={() => router.push('api/auth/signin')}>
           Sign In
         </Button>
-        <Button onClick={() => router.push("api/auth/signup")}>
-          Getting Started
-        </Button>
+        <Button onClick={() => router.push('api/auth/signup')}>Getting Started</Button>
       </div>
     </main>
   );

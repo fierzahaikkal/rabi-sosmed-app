@@ -1,5 +1,5 @@
-import NextAuth from "next-auth";
-import { options } from "@/lib/auth";
+import NextAuth from 'next-auth';
+import { options } from '@/lib/auth';
 
 const config = NextAuth(options);
 
