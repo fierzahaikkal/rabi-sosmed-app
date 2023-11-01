@@ -1,8 +1,8 @@
-import Navhead from '@/components/navhead';
+import Navhead from '@/components/NavHead';
 import { Button } from '@/components/ui/button';
 import { Github, Mail } from 'lucide-react';
 import Link from 'next/link';
-import SignUpForm from '@/components/signupForm';
+import SignUpForm from '@/components/SignupForm';
 
 export default function SignIn() {
   return (

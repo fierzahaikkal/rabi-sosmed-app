@@ -1,7 +1,7 @@
-import CardBanner from '@/components/card-banner';
-import LandingHeader from '@/components/landing-header';
-import LicenseFooter from '@/components/license-footer';
-import Navhead from '@/components/navhead';
+import CardBanner from '@/components/CardBanner';
+import LandingHeader from '@/components/LandingHeader';
+import LicenseFooter from '@/components/LicenseFooter';
+import Navhead from '@/components/NavHead';
 import Image from 'next/image';
 import gradient from 'public/gradient.svg';
 

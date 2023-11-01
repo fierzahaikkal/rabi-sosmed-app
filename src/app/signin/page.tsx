@@ -1,5 +1,5 @@
-import SignInForm from '@/components/signinForm';
-import Navhead from '@/components/navhead';
+import SignInForm from '@/components/SigninForm';
+import Navhead from '@/components/NavHead';
 import { Button } from '@/components/ui/button';
 import { Github, Mail } from 'lucide-react';
 import Link from 'next/link';
