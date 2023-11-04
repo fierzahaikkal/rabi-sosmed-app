@@ -14,10 +14,10 @@ export default function Navhead() {
         </Link>
       </div>
       <div className="flex gap-x-4">
-        <Button variant={'outline'} onClick={() => router.push('api/auth/signin')}>
+        <Button variant={'outline'} onClick={() => router.push('/signin')}>
           Sign In
         </Button>
-        <Button onClick={() => router.push('api/auth/signup')}>Getting Started</Button>
+        <Button onClick={() => router.push('/signup')}>Getting Started</Button>
       </div>
     </main>
   );

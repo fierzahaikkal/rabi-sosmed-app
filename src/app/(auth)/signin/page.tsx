@@ -11,13 +11,6 @@ export default function SignIn() {
       <div className="flex flex-col place-content-center">
         <div className="flex h-fit w-[550px] flex-col gap-y-[24px] rounded-xs p-[32px] shadow-lg">
           <SignInForm />
-          <Button className="bg-slate-800 ring-offset-slate-800 hover:bg-slate-700">
-            <Github className="mr-2" />
-            Sign In With GitHub
-          </Button>
-          <Button variant={'destructive'}>
-            <Mail className="mr-2" /> Sign In With Google
-          </Button>
           <p className="pt-[16px] text-center">
             Im New Here!
             <Link href={'api/auth/signup'} className="text-blue-500 underline">

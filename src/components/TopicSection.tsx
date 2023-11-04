@@ -6,7 +6,7 @@ interface TopicSectionProps {
 }
 
 const TopicSection: FC<TopicSectionProps> = ({ children }) => {
-  const topicArr: string[] = [
+  const topicArr: String[] = [
     'For You',
     'Sports',
     'Foods',

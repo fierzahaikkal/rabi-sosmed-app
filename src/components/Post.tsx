@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
-interface PostProps {}
-interface userObj {
+interface PostProps {
   id: string;
-  username: string;
-  topics: {};
+  user_id: string;
+  topic_id: string;
+  content: string;
+  image_url?: string;
 }
 
 const Post: FC<PostProps> = ({}) => {
