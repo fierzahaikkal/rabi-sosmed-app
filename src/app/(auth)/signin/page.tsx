@@ -1,5 +1,5 @@
-import SignInForm from '@/components/SigninForm';
-import Navhead from '@/components/NavHead';
+import SigninForm from '@/components/SigninForm';
+import Navhead from '@/components/Navhead';
 import { Button } from '@/components/ui/button';
 import { Github, Mail } from 'lucide-react';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ export default function SignIn() {
       <Navhead />
       <div className="flex flex-col place-content-center">
         <div className="flex h-fit w-[550px] flex-col gap-y-[24px] rounded-xs p-[32px] shadow-lg">
-          <SignInForm />
+          <SigninForm />
           <p className="pt-[16px] text-center">
             Im New Here!
             <Link href={'api/auth/signup'} className="text-blue-500 underline">

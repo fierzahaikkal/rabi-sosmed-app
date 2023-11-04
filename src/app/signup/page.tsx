@@ -1,4 +1,4 @@
-import Navhead from '@/components/NavHead';
+import Navhead from '@/components/Navhead';
 import SigninForm from '@/components/SigninForm';
 import Link from 'next/link';
 
