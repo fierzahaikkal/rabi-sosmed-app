@@ -1,4 +1,4 @@
-import { getServerSession, AuthOptions, NextAuthOptions } from 'next-auth';
+import { getServerSession, NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -40,8 +40,7 @@ export const options: NextAuthOptions = {
     //     },
     //   },
     // }),
-  ],
-  callbacks: {
+  ],callbacks: {
     async session({ session, token, user }) {
       const getToken = await db.account.findFirst({
         where: {
@@ -56,6 +55,7 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
+  
 };
 
 export const getAuthSession = () => getServerSession(options);

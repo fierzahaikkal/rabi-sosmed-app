@@ -1,7 +1,5 @@
 import SigninForm from '@/components/SigninForm';
-import Navhead from '@/components/Navhead';
-import { Button } from '@/components/ui/button';
-import { Github, Mail } from 'lucide-react';
+import Navhead from '@/components/NavHead';
 import Link from 'next/link';
 
 export default function SignIn() {
