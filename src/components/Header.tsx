@@ -9,7 +9,7 @@ import { User as AvatarUser } from 'lucide-react';
 
 interface HeaderProps extends AvatarProps {
   children?: ReactNode;
-  user: Pick<User, 'image' | 'name'>;
+  user: Pick<User, 'image' | 'name' | 'email'>;
 }
 
 const Header: FC<HeaderProps> = ({ user, children, ...props }) => {
