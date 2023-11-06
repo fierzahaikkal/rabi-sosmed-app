@@ -6,6 +6,7 @@ export default function Feeds() {
     <main className="flex flex-col items-center gap-y-[80px] px-[160px]">
       <Header />
       <TopicSection />
+      <p></p>
     </main>
   );
 }

@@ -7,7 +7,7 @@ import { db } from '@/lib/db';
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   secret: process.env.NEXTAUTH_SECRET,
-  pages: { signIn: '/signin', signOut: '/signout', newUser: '/signup' },
+  pages: { signIn: '/signin', signOut: '/signout' },
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -40,7 +40,8 @@ export const options: NextAuthOptions = {
     //     },
     //   },
     // }),
-  ],callbacks: {
+  ],
+  callbacks: {
     async session({ session, token, user }) {
       const getToken = await db.account.findFirst({
         where: {
@@ -52,10 +53,18 @@ export const options: NextAuthOptions = {
         accessToken = getToken.access_token!;
       }
       session.user.token = accessToken;
+
+      if (session.user.token) {
+        return {
+          ...session,
+          redirect: {
+            destination: '/feeds',
+          },
+        };
+      }
       return session;
     },
   },
-  
 };
 
 export const getAuthSession = () => getServerSession(options);
