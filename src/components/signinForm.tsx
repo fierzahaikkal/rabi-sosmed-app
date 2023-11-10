@@ -31,7 +31,7 @@ const SigninForm: FC<SigninFormProps> = ({ className, ...props }) => {
   const loginWithGoogle = async () => {
     setIsLoading(true);
     try {
-      throw new Error();
+      await signIn('google');
     } catch (error) {
       toast({
         title: 'Error',
@@ -43,8 +43,15 @@ const SigninForm: FC<SigninFormProps> = ({ className, ...props }) => {
     }
   };
   return (
-    <div className="flex flex-col gap-y-4">
-      <UserAuthForm />
+    <div className="flex flex-col gap-y-32">
+      {/* <UserAuthForm /> */}
+      <div className="flex flex-col gap-y-2 text-center">
+        <h1 className="text-heading">Hi there!👋</h1>
+        <h3 className="text-body">
+          Elevate your online experience. Sign in effortlessly and explore a universe of
+          possibilities.
+        </h3>
+      </div>
       <div className={cn('flex flex-col justify-center gap-y-4', className)} {...props}>
         <Button
           isLoading={isLoading}

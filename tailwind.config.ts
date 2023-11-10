@@ -100,12 +100,13 @@ module.exports = {
         banner: ['48.83px', '64px'],
       },
       borderRadius: {
+        DEFAULT: 'var(--radius)',
         xs: 'var(--radius)',
-        sm: 'calc(var(--radius)+8)',
-        md: 'calc(var(--radius)+16)',
-        lg: 'calc(var(--radius)+24)',
-        xl: 'calc(var(--radius)+32)',
-        '2xl': 'calc(var(--radius)+40)',
+        sm: 'calc(var(--radius) + 8px)',
+        md: 'calc(var(--radius) + 16px)',
+        lg: 'calc(var(--radius) + 24px)',
+        xl: 'calc(var(--radius) + 32px)',
+        '2xl': 'calc(var(--radius) + 40px)',
       },
       keyframes: {
         'accordion-down': {

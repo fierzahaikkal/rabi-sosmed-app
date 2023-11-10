@@ -10,7 +10,7 @@ export default function SignIn() {
         <div className="flex h-fit w-[550px] flex-col gap-y-[24px] rounded-xs p-[32px] shadow-lg">
           <SigninForm />
           <p className="pt-[16px] text-center">
-            Im New Here!
+            Im New Here!{' '}
             <Link href={'api/auth/signup'} className="text-blue-500 underline">
               need account register
             </Link>

@@ -1,13 +1,13 @@
 import CardBanner from '@/components/CardBanner';
 import LandingHeader from '@/components/LandingHeader';
 import LicenseFooter from '@/components/LicenseFooter';
-import Navhead from '@/components/NavHead';
+import Navhead from '@/components/Navhead';
 import Image from 'next/image';
 import gradient from 'public/gradient.svg';
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col gap-y-20 overflow-hidden px-[160px]">
+    <main className="relative flex flex-col gap-y-80 overflow-hidden px-[160px]">
       <Image
         src={gradient}
         objectFit="cover"
@@ -16,9 +16,7 @@ export default function Home() {
         className="absolute z-[-1] mx-auto"
       />
       <Navhead></Navhead>
-      <div className="flex flex-col items-center">
-        <LandingHeader></LandingHeader>
-      </div>
+      <LandingHeader></LandingHeader>
       <CardBanner></CardBanner>
       <LicenseFooter />
     </main>
