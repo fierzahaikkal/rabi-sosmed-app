@@ -1,8 +1,19 @@
+'use client';
 import SigninForm from '@/components/SigninForm';
-import Navhead from '@/components/NavHead';
+import Navhead from '@/components/Navhead';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export default function SignIn() {
+  const session = useSession();
+  const searchParams = useSearchParams();
+
+  if (session?.status === 'authenticated') {
+    const callback = searchParams.get('callbackUrl') ?? '/';
+    redirect(callback);
+  }
   return (
     <main className="flex flex-col items-center gap-y-[80px] px-[160px]">
       <Navhead />

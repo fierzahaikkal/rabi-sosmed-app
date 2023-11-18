@@ -3,6 +3,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { db } from '@/lib/db';
+import { redirect } from 'next/navigation';
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -50,18 +51,9 @@ export const options: NextAuthOptions = {
       });
       let accessToken: string | null = null;
       if (getToken) {
-        accessToken = getToken.access_token!;
+        accessToken = getToken.access_token;
       }
       session.user.token = accessToken;
-
-      if (session.user.token) {
-        return {
-          ...session,
-          redirect: {
-            destination: '/feeds',
-          },
-        };
-      }
       return session;
     },
   },
