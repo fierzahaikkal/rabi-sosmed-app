@@ -11,7 +11,7 @@ export default function SignIn() {
   const searchParams = useSearchParams();
 
   if (session?.status === 'authenticated') {
-    const callback = searchParams.get('callbackUrl') ?? '/';
+    const callback = searchParams.get('callbackUrl') ?? '/topics';
     redirect(callback);
   }
   return (

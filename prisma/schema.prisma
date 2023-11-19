@@ -11,18 +11,18 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -38,17 +38,18 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  comments      comments[]
-  likes         likes[]
-  posts         posts[]
-  replies       replies[]
+  comments      Comments[]
+  likes         Likes[]
+  posts         Posts[]
+  replies       Replies[]
+  UserTopics    UserTopics[]
 }
 
 model VerificationToken {
@@ -58,66 +59,79 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-model comments {
-  id        String     @id @default(cuid())
-  userId    String    @map("user_id")
-  postId    String     @map("post_id")
-  content   String     @db.Text
+
+model Comments {
+  id         String    @id @default(cuid())
+  userId     String    @map("user_id")
+  postId     String    @map("post_id")
+  content    String    @db.Text
   created_at DateTime  @default(now()) @db.Timestamp(0)
   user       User      @relation(fields: [userId], references: [id])
-  posts      posts     @relation(fields: [postId], references: [id])
-  replies    replies[]
+  posts      Posts     @relation(fields: [postId], references: [id])
+  replies    Replies[]
 
   @@index([postId], map: "postId")
   @@index([userId], map: "userId")
 }
 
-model likes {
-  id        String    @id @default(cuid())
-  userId    String    @map("user_id")
-  postId    String    @map("post_id")
+model Likes {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  postId     String   @map("post_id")
   created_at DateTime @default(now()) @db.Timestamp(0)
   user       User     @relation(fields: [userId], references: [id])
-  posts      posts    @relation(fields: [postId], references: [id])
+  posts      Posts    @relation(fields: [postId], references: [id])
 
   @@index([postId], map: "postId")
   @@index([userId], map: "userId")
 }
 
-model posts {
+model Posts {
   id         String     @id @default(cuid())
-  userId    String      @map("user_id")
+  userId     String     @map("user_id")
   content    String     @db.Text
   image_url  String?    @db.VarChar(255)
-  topicId   String      @map("topic_id")
+  topicId    String     @map("topic_id")
   created_at DateTime   @default(now()) @db.Timestamp(0)
   updated_at DateTime   @default(now()) @db.Timestamp(0)
-  comments   comments[]
-  likes      likes[]
-  user       User        @relation(fields: [userId], references: [id])
-  topics     topics?     @relation(fields: [topicId], references: [id])
+  comments   Comments[]
+  likes      Likes[]
+  user       User       @relation(fields: [userId], references: [id])
+  topics     Topics?    @relation(fields: [topicId], references: [id])
 
   @@index([topicId], map: "topicId")
   @@index([userId], map: "userId")
 }
 
-model replies {
-  id         String      @id @default(cuid())
-  userId    String    @map("user_id")
-  commentId String    @map("comment_id")
+model Replies {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  commentId  String   @map("comment_id")
   content    String   @db.Text
   created_at DateTime @default(now()) @db.Timestamp(0)
-  user       User    @relation(fields: [userId], references: [id])
-  comments   comments @relation(fields: [commentId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+  comments   Comments @relation(fields: [commentId], references: [id])
 
   @@index([commentId], map: "commentId")
   @@index([userId], map: "userId")
 }
 
-model topics {
-  id    String     @id @default(cuid())
-  name  String  @unique(map: "name") @db.VarChar(255)
-  posts posts[]
+model Topics {
+  id         String       @id @default(cuid())
+  name       String       @unique(map: "name") @db.VarChar(255)
+  posts      Posts[]
+  UserTopics UserTopics[]
+}
+
+model UserTopics {
+  id      String @id @default(cuid())
+  topicId String @map("topic_id")
+  userId  String @map("user_id")
+  user    User   @relation(fields: [userId], references: [id])
+  topics  Topics @relation(fields: [topicId], references: [id])
+
+  @@index([topicId], map: "topicId")
+  @@index([userId], map: "userId")
 }
 
 // model user {
