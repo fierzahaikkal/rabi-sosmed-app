@@ -117,19 +117,19 @@ model Replies {
 }
 
 model Topics {
-  id         String       @id @default(cuid())
-  name       String       @unique(map: "name") @db.VarChar(255)
-  posts      Posts[]
-  UserTopics UserTopics[]
+  id    String       @id @default(cuid())
+  name  String       @unique(map: "name") @db.VarChar(255)
+  posts Posts[]
+  users UserTopics[]
 }
 
 model UserTopics {
-  id      String @id @default(cuid())
   topicId String @map("topic_id")
   userId  String @map("user_id")
   user    User   @relation(fields: [userId], references: [id])
   topics  Topics @relation(fields: [topicId], references: [id])
 
+  @@id([userId, topicId])
   @@index([topicId], map: "topicId")
   @@index([userId], map: "userId")
 }
