@@ -90,6 +90,7 @@ module.exports = {
         '80': '80px',
       },
       fontSize: {
+        // web-scale
         footnote: ['10.24px', '16px'],
         paragraph: ['12.8px', '16px'],
         body: ['16px', '24px'],
@@ -98,12 +99,21 @@ module.exports = {
         heading: ['31.25px', '40px'],
         title: ['39.06px', '48px'],
         banner: ['48.83px', '64px'],
+        // mobile-scale
+        'mobile-footnote': ['11.56px', '16px'],
+        'mobile-paragraph': ['13px', '16px'],
+        'mobile-body': ['14.63px', '16px'],
+        'mobile-subhead': ['16.45px', '24px'],
+        'mobile-headline': ['18.51px', '32px'],
+        'mobile-heading': ['20.82px', '24px'],
+        'mobile-title': ['23.43px', '24px'],
+        'mobile-banner': ['26.35px', '32px'],
       },
       borderRadius: {
         DEFAULT: 'var(--radius)',
         xs: 'var(--radius)',
         sm: 'calc(var(--radius) + 8px)',
-        md: 'calc(var(--radius) + 16px)',
+        md: 'calc(var(--radius))',
         lg: 'calc(var(--radius) + 24px)',
         xl: 'calc(var(--radius) + 32px)',
         '2xl': 'calc(var(--radius) + 40px)',

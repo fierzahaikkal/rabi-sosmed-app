@@ -10,7 +10,7 @@ import * as React from 'react';
 
 interface SigninFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const SigninForm: FC<SigninFormProps> = ({ className, ...props }) => {
+const SigninForm: FC<SigninFormProps> = ({ className, children, ...props }) => {
   const { toast } = useToast();
   // const [isLoading, setIsLoading] = React.useState<boolean>(false);
 

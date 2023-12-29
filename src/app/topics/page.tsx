@@ -1,12 +1,14 @@
 import Navhead from '@/components/Navhead';
+import PostField from '@/components/PostField';
 import SelectTopic from '@/components/SelectTopic';
-import Tiptap from '@/components/Tiptap';
+import TopicSection from '@/components/TopicSection';
 
 export default function Topics() {
   return (
-    <main className="relative flex flex-col gap-y-80 overflow-hidden px-[160px]">
+    <main className="relative grid grid-cols-1 gap-y-80 overflow-hidden px-[24px] sm:px-[160px]">
       <Navhead />
-      <Tiptap />
+      <TopicSection />
+      <PostField />
     </main>
   );
 }
