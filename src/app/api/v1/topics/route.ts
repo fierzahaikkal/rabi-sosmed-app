@@ -1,66 +1,94 @@
 import { getAuthSession } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { db } from '@/lib/db';
-import { Hash, createHash } from 'crypto';
-import { NextApiRequest, NextApiResponse } from 'next';
-import Topics from '@/app/topics/page';
+import { NextResponse } from 'next/server';
+import { FollowTopicValidator, TopicValidator } from '@/lib/validators/topic';
+import { z } from 'zod';
 
-// export async function POST(req: NextApiRequest) {
-//   const session = await getAuthSession();
+export async function GET(req: Request) {
+  try {
+    const session = await getAuthSession();
+    // const token = headers().get('Authorization')?.split(' ')[1];
+
+    if (!session) {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+    const topics = await db.topics.findMany();
+    return NextResponse.json(topics);
+  } catch (error) {
+    console.log('there is an error:', error);
+  } finally {
+    await db.$disconnect();
+  }
+}
+
+// export async function POST(req: Request) {
 //   try {
-//     if (session) {
-//       const user = await db.users.findFirst({
-//         where: {
-//           id: session.user.id,
-//         },
-//       });
-//       const userTopic = await db.userTopics.create({
-//         data: {
-//           id: createHash(session.user.id),
-//           name: session.user.name,
-//         },
-//       });
+//     const session = await getAuthSession();
+//     const token = headers().get('Authorization')?.split(' ')[1];
+
+//     if (!token || !session) {
+//       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
 //     }
-//   } catch (error) {}
+//     const body = req.json();
+//     const { name } = TopicValidator.parse(body);
+//     const id = crypto.randomUUID();
+
+//     //Check if topic already exist
+//     const topicExists = await db.topics.findFirst({ where: { name } });
+
+//     if (topicExists) {
+//       return NextResponse.json({ message: 'Topic already exits' }, { status: 409 });
+//     }
+
+//     //create topics
+//     const topic = await db.topics.create({
+//       data: {
+//         id,
+//         name,
+//         creatorId: session.user.id,
+//       },
+//     });
+
+//     await db.subscription.create({
+//       data: {
+//         userId: session.user.id,
+//         topicId: topic.id,
+//       },
+//     });
+
+//     return NextResponse.json(topic.name);
+//   } catch (error) {
+//     if (error instanceof z.ZodError) {
+//       return NextResponse.json(error.message, { status: 422 });
+//     }
+//     return NextResponse.json({ message: 'Could not create topic' }, { status: 500 });
+//   } finally {
+//     await db.$disconnect();
+//   }
 // }
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getAuthSession();
-  try {
-    if (session) {
-      const topic = await db.topics.findMany();
-      res.status(200).json(topic);
-    }
-  } catch (error) {
-    console.log('there is an error:', error);
-  }
-}
+// export async function DELETE(req: Request) {
+//   try {
+//     const session = await getAuthSession();
+//     const token = headers().get('Authorization')?.split(' ')[1];
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getAuthSession();
-  try {
-    if (session) {
-      const newTopic = req.body;
-      const postTopic = await db.topics.create({
-        data: newTopic,
-      });
-      res.status(200).json(postTopic);
-    }
-  } catch (error) {
-    console.log('there is an error:', error);
-  }
-}
-
-export async function DELETE(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getAuthSession();
-  try {
-    if (session) {
-      const topicId = req.body.id;
-      const deleteTopic = await db.topics.delete({
-        where: { id: topicId },
-      });
-      res.status(200).json(deleteTopic);
-    }
-  } catch (error) {
-    console.log('there is an error:', error);
-  }
-}
+//     if (!token || !session) {
+//       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+//     }
+//     const body = req.json();
+//     const { topicId } = FollowTopicValidator.parse(body);
+//     const deleteTopic = await db.topics.delete({
+//       where: { id: topicId },
+//     });
+//     return NextResponse.json(deleteTopic);
+//   } catch (error) {
+//     if (error instanceof z.ZodError) {
+//       return NextResponse.json(error.message, { status: 400 });
+//     }
+//     return NextResponse.json(
+//       { message: 'Could not delete this topic, please try later' },
+//       { status: 500 }
+//     );
+//   }
+// }
