@@ -1,7 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { Hash, createHash } from 'crypto';
-import { GET } from '../auth/[...nextauth]/route';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Topics from '@/app/topics/page';
 
@@ -36,14 +35,30 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export async function PATCH(req: NextApiRequest) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const session = await getAuthSession();
   try {
     if (session) {
-      const { id } = req.body;
-      const topic = await db.topics.update({
-        where: { id },
+      const newTopic = req.body;
+      const postTopic = await db.topics.create({
+        data: newTopic,
       });
+      res.status(200).json(postTopic);
+    }
+  } catch (error) {
+    console.log('there is an error:', error);
+  }
+}
+
+export async function DELETE(req: NextApiRequest, res: NextApiResponse) {
+  const session = await getAuthSession();
+  try {
+    if (session) {
+      const topicId = req.body.id;
+      const deleteTopic = await db.topics.delete({
+        where: { id: topicId },
+      });
+      res.status(200).json(deleteTopic);
     }
   } catch (error) {
     console.log('there is an error:', error);

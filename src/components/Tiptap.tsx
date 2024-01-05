@@ -23,9 +23,7 @@ const Tiptap: React.FC<TiptapProps> = ({ className, ...props }) => {
   }
   return (
     <main>
-      <EditorContent editor={editor}>
-        <Sparkles className="" />
-      </EditorContent>
+      <EditorContent editor={editor} />
     </main>
   );
 };
