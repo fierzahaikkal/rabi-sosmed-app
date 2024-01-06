@@ -7,7 +7,7 @@ import gradient from 'public/gradient.svg';
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col gap-y-80 overflow-hidden px-[160px]">
+    <main className="flex flex-col gap-y-80 overflow-hidden px-[160px]">
       <Navhead></Navhead>
       <LandingHeader></LandingHeader>
       <CardBanner></CardBanner>

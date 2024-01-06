@@ -2,27 +2,29 @@ import { FC } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 interface PostProps {
-  id: string;
-  user_id: string;
-  topic_id: string;
+  user: string;
+  created_at: string;
   content: string;
+  topics: string;
   image_url?: string;
 }
 
-const Post: FC<PostProps> = ({}) => {
+const Post: FC<PostProps> = ({ user, created_at, content, topics, image_url }) => {
   return (
-    <div>
-      <div className="flex">
-        <Avatar className="h-12  w-12">
+    <section className="border-blacks grid grid-cols-1 gap-y-4 rounded-xs border px-6 py-4">
+      <section className="flex items-center gap-x-4">
+        <Avatar className="h-10 w-10">
           <AvatarImage></AvatarImage>
-          <AvatarFallback>A</AvatarFallback>
+          <AvatarFallback>JD</AvatarFallback>
         </Avatar>
-        <div>
-          <h3>John Doe</h3>
-          <h5>Sports</h5>
-        </div>
-      </div>
-    </div>
+        <h5>{user}</h5>
+        <h5>{created_at}</h5>
+      </section>
+      <section>
+        <h5>{content}</h5>
+        <h5>{topics}</h5>
+      </section>
+    </section>
   );
 };
 
