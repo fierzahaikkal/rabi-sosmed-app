@@ -1,6 +1,7 @@
 
 'use client'
 
+import topicImg from "public/ski.jpg"
 import CardBanner from "@/components/card-banner";
 import LandingHeader from "@/components/landing-header";
 import LicenseFooter from "@/components/license-footer";
@@ -116,28 +117,28 @@ function TopicPage() {
     }
 
     return (
-        <>
-            <Navhead />
-            <main className="flex justify-center items-center min-h-screen gap-x-70 w-full">
+            <main className="grid justify-center items-center min-h-screen gap-x-70 w-full">
+                
+                <section className="grid lg:grid-cols-2 mobile:grid-cols-1 justify-center gap-y-10">
+                
                 {/* gambar */}
-                <figure className="hidden sm:flex justify-center items-center w-1/2">
                     <Image 
                     style={
                         {
-                            borderTopRightRadius: '40px'
+                            borderTopRightRadius: '150px'
                         }
                     }
-                    src={"https://images.unsplash.com/photo-1565992441121-4367c2967103?auto=format&fit=crop&q=80&w=2023&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} 
+                    src={topicImg} 
                     alt='ski' 
-                    width={250}
-                    height={200} />
-                </figure>
+                    width={350}
+                    className="hidden mobile:flex mobile:mx-auto justify-center items-center w-1/2"
+                    />
                 {/* cotainer */}
                 <section className="flex flex-col max-w-2">
                 {/* select topic */}
                 <div 
                 style={{maxWidth: 400}}
-                className="flex flex-wrap gap-x-4 gap-y-3 max-w-3 w-full">
+                className="grid mobile:grid-cols-2 lg:grid-cols-2 gap-x-4 gap-y-3 mx-2">
                     <Button variant={"topics"} onClick={() =>handleSelectTopic(0, "sport")} className={`text-white w-xl p-2 ${activeStates[0] ? 'bg-indigo-100 text-black': 'bg-indigo-600'}`}>
                         Sport
                     </Button>
@@ -161,7 +162,7 @@ function TopicPage() {
                     </Button>
                 </div>
 
-                <div className="mt-28 space-x-28 flex">
+                <div className="mt-20 space-x-28 flex justify-center">
                     <Button className="bg-purple-500">
                         <ArrowLeft />
                         Back
@@ -172,9 +173,9 @@ function TopicPage() {
                     </Button>
                 </div>
                 </section>
+
+                </section>
             </main>
-            <LicenseFooter />
-        </>
     )
 }
 

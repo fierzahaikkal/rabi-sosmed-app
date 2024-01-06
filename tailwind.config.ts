@@ -16,6 +16,11 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        "mobile": "360px",
+        "tablet": "768px",
+        "laptop": "1024px"
+      },
       colors: {
         text: "hsl(var(--text))",
         "text-light": "hsl(var(--text-light))",
