@@ -1,0 +1,42 @@
+'use client';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+const people = [
+  {
+    username: 'Leslie Alexander',
+    email: 'michael.foster@example.com',
+    imageUrl:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+
+  }]
+
+export default function Navhead() {
+  const router = useRouter();
+  return (
+    <ul className='shadow'>
+      {people.map((person) => (
+        <li className='flex flex-row gap-4 p-2'>
+          <img src={person.imageUrl} alt=""  className='rounded-full h-20'/>
+          <div className=' flex flex-col'>
+            <p className="flex flex-row text-black text-xl font-normal font-['Poppins'] leading-normal gap-2">
+              {person.username}
+              <a href="#" className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                </svg>
+            </a>
+              </p>
+            <p className="text-zinc-600 text-base font-normal font-['Poppins'] leading-normal">{person.email}</p>
+            <Link href="/">
+              <p className="text-indigo-700 text-[12.80px] font-normal font-['Poppins'] leading-none mt-1">Log out</p>
+            </Link>
+            
+          </div>
+
+
+        </li>
+      ))}
+    </ul>
+  );
+}
