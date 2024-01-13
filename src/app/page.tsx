@@ -1,4 +1,5 @@
 import CardBanner from '@/components/CardBanner';
+import Features from '@/components/Features';
 import LandingHeader from '@/components/LandingHeader';
 import LicenseFooter from '@/components/LicenseFooter';
 import Navhead from '@/components/Navhead';
@@ -15,6 +16,7 @@ export default function Home() {
       <Partner />
       <Separator />
       <Steps />
+      <Features />
       <LicenseFooter />
     </main>
   );

@@ -4,7 +4,7 @@ import Steps from '@/components/Steps';
 
 export default function Temp() {
   return (
-    <main className="flex flex-col gap-y-[3rem] px-[160px] text-body">
+    <main className="flex flex-col gap-y-[3rem] px-[160px] pt-60 text-body">
       <Post
         user={'John Doe'}
         created_at={'03-01-2024'}

@@ -36,7 +36,7 @@ const NavheadButton: FC<NavheadProps> = ({}) => {
 };
 
 const NavheadWelcome: FC<NavheadProps> = ({ user }) => {
-  return <h3 className="text-xl">Welcome, {user?.name}</h3>;
+  return <h3 className="text-right text-xl">Welcome, {user?.name}</h3>;
 };
 
 export default Navhead;
