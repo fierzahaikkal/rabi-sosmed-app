@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react';
+import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 
 interface TopicSectionProps {
@@ -17,9 +18,9 @@ const TopicSection: FC<TopicSectionProps> = ({ children }) => {
   return (
     <div className="inline-flex h-fit w-full items-center justify-between border-b border-text pb-2">
       <div className="p-2 leading-normal transition duration-150 ease-in hover:bg-background-hover">
-        <a href="#">
+        <Link href="/topics">
           <Plus />
-        </a>
+        </Link>
       </div>
       <div className="flex">
         {topicArr.map((topic, index) => (

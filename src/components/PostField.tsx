@@ -8,7 +8,7 @@ const PostField: FC<PostFieldProps> = ({ className, ...props }) => {
   return (
     <div className="flex flex-col gap-y-4">
       <Tiptap />
-      <Button className=" w-fit">Post</Button>
+      <Button className="ml-auto">Post</Button>
     </div>
   );
 };

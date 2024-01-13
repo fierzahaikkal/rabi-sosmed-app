@@ -19,6 +19,9 @@ const Header: FC<HeaderProps> = ({ user }) => {
       <div className="flex gap-x-4 text-subhead underline decoration-accent underline-offset-8">
         Feeds
       </div>
+      <div className="flex gap-x-4 text-subhead underline decoration-accent underline-offset-8">
+        Profile
+      </div>
       <UserAvatar user={{ name: user.name || null, image: user.image || null }} />
     </div>
   );

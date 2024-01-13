@@ -13,10 +13,10 @@ interface NavheadProps extends HTMLAttributes<HTMLDivElement> {
 const Navhead: FC<NavheadProps> = ({ user }) => {
   const { data: session } = useSession();
   return (
-    <nav className="flex w-full items-center justify-between pt-12">
-      <Link href="/">
-        <h3 className="text-3xl font-semibold text-primary">Rabi</h3>
-        <p className="text-xs text-accent">Rencana Bicara</p>
+    <nav className="grid w-full grid-cols-2 items-center justify-between pt-12 mobile:grid-cols-1">
+      <Link href="/" className="text-left mobile:text-center">
+        <h3 className="text-3xl font-semibold text-primary mobile:text-2xl">Rabi</h3>
+        <p className="text-sm text-accent mobile:text-xs">Rencana Bicara</p>
       </Link>
       {session?.user ? <NavheadWelcome user={user} /> : <NavheadButton />}
     </nav>
@@ -26,7 +26,7 @@ const Navhead: FC<NavheadProps> = ({ user }) => {
 const NavheadButton: FC<NavheadProps> = ({}) => {
   const router = useRouter();
   return (
-    <div className="flex gap-x-4">
+    <div className="flex justify-end gap-x-4 text-body mobile:justify-center mobile:pt-2 mobile:text-paragraph">
       <Button variant={'outline'} onClick={() => router.push('/signin')}>
         Sign In
       </Button>

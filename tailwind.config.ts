@@ -16,6 +16,11 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        mobile: { min: '320px', max: '425px' },
+        tablet: { min: '768px', max: '1020px' },
+        laptop: '1024px',
+      },
       colors: {
         text: 'hsl(var(--text))',
         'text-light': 'hsl(var(--text-light))',

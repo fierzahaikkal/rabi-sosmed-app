@@ -12,7 +12,7 @@ const TopicBox: FC<TopicBoxProps> = ({}) => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch('api-for-topics', {
+        const res = await fetch('topics-api', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
