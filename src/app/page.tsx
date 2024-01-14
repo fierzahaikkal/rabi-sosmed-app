@@ -7,18 +7,9 @@ import gradient from 'public/gradient.svg';
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col gap-y-20 overflow-hidden px-[160px]">
-      <Image
-        src={gradient}
-        objectFit="cover"
-        fill
-        alt="background gradient"
-        className="absolute z-[-1] mx-auto"
-      />
+    <main className="mini:px-[12px] mobile:px-[24px] tablet:px-[80px] laptop:px-120px] grid justify-center gap-y-80 ">
       <Navhead></Navhead>
-      <div className="flex flex-col items-center">
-        <LandingHeader></LandingHeader>
-      </div>
+      <LandingHeader></LandingHeader>
       <CardBanner></CardBanner>
       <LicenseFooter />
     </main>
