@@ -15,7 +15,7 @@ export default function SignIn() {
     redirect(callback);
   }
   return (
-    <main className="flex flex-col items-center gap-y-[80px] px-[160px]">
+    <main className="flex flex-col items-center gap-y-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
       <Navhead />
       <div className="flex flex-col place-content-center">
         <div className="flex h-fit w-[550px] flex-col gap-y-[24px] rounded-xs p-[32px] shadow-lg">

@@ -8,7 +8,7 @@ import Partner from '@/components/Partner';
 import Steps from '@/components/Steps';
 import { Separator } from '@/components/ui/separator';
 
-export default function Home() {
+export default function Feeds() {
   return (
     <main className="grid justify-center gap-y-[40px] py-12 mobile:px-[24px] tablet:px-[80px] laptop:px-[160px]">
       <Navhead></Navhead>
