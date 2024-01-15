@@ -2,7 +2,6 @@
 import Navhead from '@/components/Navhead';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-s;
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import SigninForm from '@/components/signinForm';
