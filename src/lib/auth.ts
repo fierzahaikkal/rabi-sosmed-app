@@ -1,14 +1,14 @@
-import { NextAuthOptions, getServerSession } from 'next-auth';
+import { getServerSession, NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import Credentials from 'next-auth/providers/credentials';
-import prisma from './prisma';
+import { db } from '@/lib/db';
+import { redirect } from 'next/navigation';
 
 export const options: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
-  session: { strategy: 'jwt' },
-  pages: { signIn: '/signin', signOut: '/signout', newUser: '/signup' },
+  adapter: PrismaAdapter(db),
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: { signIn: '/signin', signOut: '/signout' },
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -18,7 +18,47 @@ export const options: NextAuthOptions = {
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
+    // CredentialsProvider({
+    //   credentials: {
+    //     authorize: async (credentials: { email: string; password: string }) => {
+    //       try {
+    //         const res = await fetch('api/auth/signin', {
+    //           method: 'POST',
+    //           headers: {
+    //             'Content-Type': 'application/json',
+    //           },
+    //           body: JSON.stringify(credentials),
+    //         });
+    //         const data = await res.json();
+    //         if (res.ok && data) {
+    //           return Promise.resolve(data);
+    //         } else {
+    //           return Promise.reject(new Error(data?.message || 'Failed to login'));
+    //         }
+    //       } catch (error) {
+    //         return Promise.reject(error);
+    //       }
+    //     },
+    //   },
+    // }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      const getToken = await db.account.findFirst({
+        where: {
+          userId: user.id,
+        },
+      });
+      let accessToken: string | null = null;
+      if (getToken) {
+        accessToken = getToken.access_token;
+        session.user.token = accessToken;
+        session.user.id = getToken.id;
+      }
+      session.user.token = accessToken;
+      return session;
+    },
+  },
 };
 
 export const getAuthSession = () => getServerSession(options);

@@ -1,15 +1,14 @@
 'use client';
 import Header from '@/components/Header';
-import TopicSection from '@/components/TopicSection';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { signOut, useSession } from 'next-auth/react';
-import PostField from '@/components/PostField';
 import Post from '@/components/Post';
-import { useEffect, useState } from 'react';
+import TopicSection from '@/components/TopicSection';
+import { Button } from '@/components/ui/button';
 import { ShowPostPayload } from '@/lib/validators/post';
+import { signOut, useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-export default function Feeds() {
+export default function Profile({ params }: { params: { user: string[] } }) {
   const { data: session } = useSession();
 
   if (!session) {
@@ -19,29 +18,28 @@ export default function Feeds() {
   const [posts, setPosts] = useState<ShowPostPayload[]>([]);
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch('/api/v1/posts', {
+        const res = await fetch(`/api/v1/posts/${params.user}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        const data = await res.json();
-        setPosts(data);
-        console.log('feeds data:', data);
+        const postData = await res.json();
+        setPosts(postData);
+        console.log('profile post:', postData);
       } catch (error) {
-        console.log('Error fetching posts:', error);
+        console.error('Error fetching post:', error);
       }
     };
-    getData();
-  }, []);
+    fetchData();
+  }, [params.user]);
 
   return (
     <main className="grid items-center py-12 mobile:gap-y-[40px] mobile:px-[24px] laptop:gap-y-[64px] laptop:px-[160px]">
-      {session?.user && <Header user={session.user} id={session.user.id} />}
+      {session?.user && <Header user={session.user} id={session.user} />}
       <TopicSection />
-      <PostField />
       {posts.map((post) => (
         <Post
           key={post.id}

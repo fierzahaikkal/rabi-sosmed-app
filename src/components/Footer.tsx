@@ -1,54 +1,57 @@
-import React from 'react';
-import { Github, Codepen, Youtube, Heart, Cookie } from 'lucide-react';
+import { Instagram, Linkedin, Mail, Phone } from 'lucide-react';
+import Link from 'next/link';
+import { FC, HTMLAttributes } from 'react';
 
-const MyComponent: React.FC = () => {
+interface FooterProps extends HTMLAttributes<HTMLDivElement> {}
+
+const Footer: FC<FooterProps> = ({}) => {
   return (
-    <div className="flex min-w-[15rem] flex-col items-start gap-8 bg-gray-200 p-12 sm:p-12 md:p-12 lg:p-12 xl:p-12">
-      <div className="logo">
-        <a href="#">
-          <h3 className="text-3xl font-semibold text-primary">Rabi</h3>
-          <p className="text-sm text-accent">Rencana Bicara</p>
-        </a>
+    <div className="grid grid-cols-2 items-start justify-between gap-y-4 rounded-xs bg-primary-foreground px-10 py-12 mobile:grid-cols-1">
+      <div className="flex flex-col items-center justify-start">
+        <div className="text-banner font-semibold text-primary">Rabi</div>
+        <div className="text-paragraph text-text">Copyright Reserved @ 2023 Rabi Social.</div>
       </div>
-
-      <div className="footer">
-        <div className="reversed menu-item-header mb-4 text-sm sm:mb-4 sm:text-base md:mb-4 lg:mb-4 xl:mb-4">
-          LET'S CONTACT
+      <div className="grid w-full grid-cols-2 items-center justify-between mobile:grid-cols-1">
+        <div className="flex h-full flex-col items-start gap-4">
+          <h1 className="mobile:text-subheading text-heading font-semibold text-accent">Explore</h1>
+          <div className="flex flex-col items-start justify-start gap-4">
+            <Link href="/#" className="text-body text-text">
+              Community
+            </Link>
+            <Link href="/#" className="text-body text-text">
+              Setup
+            </Link>
+            <Link href="/#" className="text-body text-text">
+              Features
+            </Link>
+          </div>
         </div>
-        <div className="menu-item reversed mb-2 text-sm sm:mb-4 sm:text-base md:mb-4 lg:mb-4 xl:mb-4">
-          <a href="mailto:youremail@example.com">Contact me</a>
+        <div className="flex h-full flex-col items-start justify-start gap-4">
+          <h1 className="mobile:text-subheading text-heading font-semibold text-accent">
+            Get in touch
+          </h1>
+          <div className="flex flex-col items-start justify-start gap-4">
+            <Link href="#" className="flex items-center gap-x-1 text-body text-text">
+              <Mail className="h-4 w-4" />
+              Email
+            </Link>
+            <Link href="#" className="flex items-center gap-x-1 text-body text-text">
+              <Phone className="h-4 w-4" />
+              Whatsapp
+            </Link>
+            <Link href="#" className="flex items-center gap-x-1 text-body text-text">
+              <Instagram className="h-4 w-4" />
+              Instagram
+            </Link>
+            <Link href="#" className="flex items-center gap-x-1 text-body text-text">
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
+            </Link>
+          </div>
         </div>
-        <div className="menu-item reversed mb-4">
-          <a href="https://www.youtube.com" target="_blank" className="flex items-center text-sm">
-            <Youtube className="ml-1 mr-1" />
-            YouTube
-          </a>
-        </div>
-        <div className="menu-item reversed mb-4">
-          <a href="https://github.com" target="_blank" className="flex items-center text-sm">
-            <Github className="ml-1 mr-1" />
-            GitHub
-          </a>
-        </div>
-        <div className="menu-item reversed mb-4">
-          <a href="https://codepen.io" target="_blank" className="flex items-center text-sm">
-            <Codepen className="ml-1 mr-1" />
-            CodePen
-          </a>
-        </div>
-      </div>
-      <hr className="my-4 w-full border-b-2 border-black" />
-      <div className="text-xs sm:text-sm">
-        <p className="mb-2 flex items-center">
-          Made with <Heart className="ml-1 mr-1" /> by Rabi
-        </p>
-        <p className="mb-2 flex items-center">
-          No cookies <Cookie className="ml-1 mr-1" />
-        </p>
-        <p className="mb-4">Copyright reserved 2023 @ Pweb Assignment</p>
       </div>
     </div>
   );
 };
 
-export default MyComponent;
+export default Footer;
