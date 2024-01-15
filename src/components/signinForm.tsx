@@ -1,23 +1,17 @@
-"use client";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "./ui/button";
+'use client';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from './ui/button';
 
 const formSchema = z.object({
   email: z.string().min(12, {
-    message: "Email must be at least 12 characters.",
+    message: 'Email must be at least 12 characters.',
   }),
   password: z.string().min(8, {
-    message: "Password must be include unique characters",
+    message: 'Password must be include unique characters',
   }),
 });
 
@@ -25,8 +19,8 @@ export default function SignInForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
