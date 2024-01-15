@@ -1,12 +1,16 @@
-import { FC, HTMLAttributes, useEffect, useState } from 'react';
-import { Button } from './ui/button';
-import { useRouter } from 'next/navigation';
+'use client';
+import { FC, useEffect, useState } from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 import { ShowTopicPayload } from '@/lib/validators/topic';
 
-interface TopicBoxProps extends HTMLAttributes<HTMLDivElement> {}
+interface TopicInPostProps {}
 
-const TopicBox: FC<TopicBoxProps> = ({}) => {
-  const router = useRouter();
+const TopicInPost: FC<TopicInPostProps> = ({}) => {
   const [topics, setTopics] = useState<ShowTopicPayload[]>([]);
   const [isSelected, setIsSelected] = useState<string[]>([]);
 
@@ -22,7 +26,6 @@ const TopicBox: FC<TopicBoxProps> = ({}) => {
         });
         const data = await res.json();
         setTopics(data);
-        console.log(data);
       } catch (error) {
         console.log('Error fetching topics:', error);
       }
@@ -40,26 +43,21 @@ const TopicBox: FC<TopicBoxProps> = ({}) => {
     }
   };
   return (
-    <section className="grid h-fit grid-cols-3 gap-3">
-      <Button
-        className="bg-slate-400 hover:bg-slate-500 active:bg-slate-600"
-        onClick={() => router.push('/create/topic')}
-      >
-        +
-      </Button>
-      {topics.map((topic) => (
-        <Button
-          className={` ${topic.name.length > 10 ? 'col-span-2' : 'col-span-1'} ${
-            isSelected.includes(topic.id) ? 'bg-blue-500 text-white' : ''
-          }`}
-          key={topic.id}
-          onClick={() => handleSelectedTopic(topic.id)}
-        >
-          {topic.name}
-        </Button>
-      ))}
+    <section>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {isSelected.length > 0 ? `${isSelected.join(', ')}` : 'Selected Topic'}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          {topics.map((topic, index) => (
+            <DropdownMenuItem key={index} onClick={() => handleSelectedTopic(topic.name)}>
+              {topic.name}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </section>
   );
 };
 
-export default TopicBox;
+export default TopicInPost;

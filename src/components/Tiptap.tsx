@@ -1,14 +1,14 @@
 'use client';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Typography from '@tiptap/extension-typography';
 import { HTMLAttributes } from 'react';
-import { Sparkles } from 'lucide-react';
 import React from 'react';
 
 interface TiptapProps extends HTMLAttributes<HTMLDivElement> {}
 const Tiptap: React.FC<TiptapProps> = ({ className, ...props }) => {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, Typography],
     editorProps: {
       attributes: {
         class:

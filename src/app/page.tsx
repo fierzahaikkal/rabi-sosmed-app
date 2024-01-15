@@ -1,5 +1,6 @@
 import CardBanner from '@/components/CardBanner';
 import Features from '@/components/Features';
+import Footer from '@/components/Footer';
 import LandingHeader from '@/components/LandingHeader';
 import LicenseFooter from '@/components/LicenseFooter';
 import Navhead from '@/components/Navhead';
@@ -9,7 +10,7 @@ import { Separator } from '@/components/ui/separator';
 
 export default function Home() {
   return (
-    <main className="grid justify-center gap-y-[40px] mobile:px-[24px] tablet:px-[80px] laptop:px-[160px]">
+    <main className="grid justify-center gap-y-[40px] py-12 mobile:px-[24px] tablet:px-[80px] laptop:px-[160px]">
       <Navhead></Navhead>
       <LandingHeader></LandingHeader>
       <CardBanner></CardBanner>
@@ -17,7 +18,7 @@ export default function Home() {
       <Separator />
       <Steps />
       <Features />
-      <LicenseFooter />
+      <Footer />
     </main>
   );
 }

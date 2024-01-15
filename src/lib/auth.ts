@@ -43,7 +43,7 @@ export const options: NextAuthOptions = {
     // }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, user }) {
       const getToken = await db.account.findFirst({
         where: {
           userId: user.id,
@@ -52,6 +52,8 @@ export const options: NextAuthOptions = {
       let accessToken: string | null = null;
       if (getToken) {
         accessToken = getToken.access_token;
+        session.user.token = accessToken;
+        session.user.id = getToken.id;
       }
       session.user.token = accessToken;
       return session;

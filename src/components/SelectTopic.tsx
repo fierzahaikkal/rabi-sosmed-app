@@ -20,7 +20,7 @@ const SelectTopic: FC<SelectTopicProps> = ({ className, ...props }) => {
   ];
 
   const selected = async () => {
-    const userTopic = db.userTopics;
+    const userTopic = db.topics;
     try {
       if (isSelected) {
         return setIsSelected(false);

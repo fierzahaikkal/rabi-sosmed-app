@@ -13,7 +13,7 @@ interface NavheadProps extends HTMLAttributes<HTMLDivElement> {
 const Navhead: FC<NavheadProps> = ({ user }) => {
   const { data: session } = useSession();
   return (
-    <nav className="grid w-full grid-cols-2 items-center justify-between pt-12 mobile:grid-cols-1">
+    <nav className="grid w-full grid-cols-2 items-center justify-between mobile:grid-cols-1">
       <Link href="/" className="text-left mobile:text-center">
         <h3 className="text-3xl font-semibold text-primary mobile:text-2xl">Rabi</h3>
         <p className="text-sm text-accent mobile:text-xs">Rencana Bicara</p>

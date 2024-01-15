@@ -4,17 +4,18 @@ import { MessageSquare } from 'lucide-react';
 import { Separator } from './ui/separator';
 import Replies from './Replies';
 import { ScrollArea } from './ui/scroll-area';
+import { formatDistanceToNow } from 'date-fns';
 
 interface CommentsProps extends HTMLAttributes<HTMLDivElement> {
   user: string;
   created_at: string;
-  comment: string;
+  content: string;
   count_replies: number;
 }
 
-const Comments: FC<CommentsProps> = ({ user, created_at, comment, count_replies }) => {
+const Comments: FC<CommentsProps> = ({ user, created_at, content, count_replies }) => {
   return (
-    <ScrollArea className="h-[40vh] rounded-md border">
+    <ScrollArea className="h-[40vh] rounded-md border bg-primary-foreground">
       <section className="grid grid-cols-1 gap-y-4 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-4">
@@ -24,10 +25,10 @@ const Comments: FC<CommentsProps> = ({ user, created_at, comment, count_replies 
             </Avatar>
             <h5>{user}</h5>
           </div>
-          <h5 className="text-right">{created_at}</h5>
+          <h5 className="text-right">{formatDistanceToNow(created_at, { addSuffix: true })}</h5>
         </div>
         <div>
-          <h5>{comment}</h5>
+          <h5>{content}</h5>
         </div>
         <div className="flex gap-x-2">
           <button>
@@ -35,7 +36,7 @@ const Comments: FC<CommentsProps> = ({ user, created_at, comment, count_replies 
           </button>
           <h5>Replies {count_replies}</h5>
         </div>
-        <Separator />
+        <Separator className="bg-text" />
         {count_replies > 0 ? (
           <Replies
             user={'Jennifer Doe'}

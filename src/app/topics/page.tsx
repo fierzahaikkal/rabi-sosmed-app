@@ -14,7 +14,7 @@ export default function Topics() {
     redirect('/api/auth/signin/?callbackUrl=/topics');
   }
   return (
-    <main className="grid grid-cols-1 gap-y-80 px-[24px] sm:px-[160px]">
+    <main className="grid grid-cols-1 gap-y-80 px-[24px] py-12 sm:px-[160px]">
       <Navhead user={session.user} />
       <section className="grid grid-cols-2 gap-x-2">
         <Image

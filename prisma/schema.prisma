@@ -76,15 +76,12 @@ model Comments {
 }
 
 model Likes {
-  id         String   @id @default(cuid())
-  userId     String   @map("user_id")
-  postId     String   @map("post_id")
-  created_at DateTime @default(now()) @db.Timestamp(0)
-  user       User     @relation(fields: [userId], references: [id])
-  posts      Posts    @relation(fields: [postId], references: [id])
+  userId String @map("user_id")
+  postId String @map("post_id")
+  user   User   @relation(fields: [userId], references: [id])
+  posts  Posts  @relation(fields: [postId], references: [id])
 
-  @@index([postId], map: "postId")
-  @@index([userId], map: "userId")
+  @@id([userId, postId])
 }
 
 model Posts {

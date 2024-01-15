@@ -17,8 +17,8 @@ module.exports = {
     },
     extend: {
       screens: {
-        mobile: { min: '320px', max: '425px' },
-        tablet: { min: '768px', max: '1020px' },
+        mobile: { min: '320px', max: '426px' },
+        tablet: { min: '768px', max: '1021px' },
         laptop: '1024px',
       },
       colors: {

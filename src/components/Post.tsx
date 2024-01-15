@@ -1,21 +1,50 @@
-import { FC } from 'react';
+'use client';
+import { format } from 'date-fns';
+import { FC, useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Badge } from './ui/badge';
 import { Heart, MessageSquare } from 'lucide-react';
-import { Button } from './ui/button';
 import Comments from './Comments';
-import { Separator } from './ui/separator';
+import { ShowPostPayload } from '@/lib/validators/post';
 
 interface PostProps {
-  user: string;
-  created_at: string;
-  content: string;
+  postId: string;
+  post: {
+    id: string;
+    userId: string;
+    content: string;
+    topicId: string;
+    comments: Array<{
+      id: string;
+      userId: string;
+      postId: string;
+      content: string;
+      created_at: Date;
+      user: { name: string };
+    }>;
+    created_at: Date;
+  };
+  // user: Pick<User, 'name' | 'image' | 'id'>;
   topics: string[];
-  image_url?: string;
   count_comments: number;
 }
 
-const Post: FC<PostProps> = ({ user, created_at, content, topics, image_url, count_comments }) => {
+const Post: FC<PostProps> = ({ post, topics, count_comments, postId }) => {
+  const [posts, setPosts] = useState<ShowPostPayload[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`api/v1/posts/${postId}`);
+        const postData = await res.json();
+        setPosts(postData);
+        console.log('post data:', postData);
+      } catch (error) {
+        console.error('Error fetching post:', error);
+      }
+    };
+    fetchData();
+  }, [postId]);
   return (
     <section className="grid grid-cols-1 gap-y-4 rounded-xs border border-primary px-6 py-4 shadow-md">
       <div className="flex items-center justify-between">
@@ -24,9 +53,9 @@ const Post: FC<PostProps> = ({ user, created_at, content, topics, image_url, cou
             <AvatarImage></AvatarImage>
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
-          <h5>{user}</h5>
+          <h5>John Doe</h5>
         </div>
-        <h5 className="text-right">{created_at}</h5>
+        <h5 className="text-right">{format(post.created_at.toLocaleString(), 'dd-MM-yyyy')}</h5>
       </div>
       <div>
         {topics.map((topic, index) => (
@@ -34,7 +63,7 @@ const Post: FC<PostProps> = ({ user, created_at, content, topics, image_url, cou
             {topic}
           </Badge>
         ))}
-        <h5 className="pt-4">{content}</h5>
+        <h5 className="pt-4">{post.content}</h5>
       </div>
       <div className="flex gap-x-2">
         <button>
@@ -45,16 +74,18 @@ const Post: FC<PostProps> = ({ user, created_at, content, topics, image_url, cou
         </button>
         <h5>Comments {count_comments}</h5>
       </div>
-      {count_comments > 0 ? (
-        <Comments
-          user={'Jennifer Doe'}
-          created_at={'4m ago'}
-          comment={'Thats Cool!'}
-          count_replies={2}
-        />
-      ) : (
-        ''
-      )}
+      {Array.isArray(posts) &&
+        posts.map((post) =>
+          post.comments.map((comment) => (
+            <Comments
+              key={comment.id}
+              user={comment.user.name}
+              created_at={comment.created_at.toLocaleString()}
+              content={comment.content}
+              count_replies={0}
+            />
+          ))
+        )}
     </section>
   );
 };

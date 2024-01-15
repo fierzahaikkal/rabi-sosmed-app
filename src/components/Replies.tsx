@@ -32,7 +32,7 @@ const Replies: FC<RepliesProps> = ({ user, created_at, comment, count_replies })
         </button>
         <h5>Replies {count_replies}</h5>
       </div>
-      <Separator />
+      <Separator className="bg-text" />
       {count_replies > 0 ? (
         <Replies
           user={'Jennifer Doe'}
