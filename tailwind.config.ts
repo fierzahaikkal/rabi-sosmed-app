@@ -16,14 +16,11 @@ module.exports = {
       },
     },
     extend: {
-
-      screens:{
-        'laptop': '1024px',
-        'tablet': '768px',
-        'mobile': '360px',
-        'mini': '120px',
+      screens: {
+        "mobile": "360px",
+        "tablet": "768px",
+        "laptop": "1024px"
       },
-
       colors: {
         text: 'hsl(var(--text))',
         'text-light': 'hsl(var(--text-light))',
