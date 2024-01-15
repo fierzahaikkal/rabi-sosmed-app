@@ -1,67 +1,47 @@
-"use client";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "./ui/button";
+'use client';
+import { FC } from 'react';
+import { Button } from './ui/button';
+import { useToast } from './ui/use-toast';
+import { cn } from '@/lib/utils';
+import { signIn } from 'next-auth/react';
+import { Github, Mail } from 'lucide-react';
+import UserAuthForm from './UserAuthForm';
+import * as React from 'react';
 
-const formSchema = z.object({
-  email: z.string().min(12, {
-    message: "Email must be at least 12 characters.",
-  }),
-  password: z.string().min(8, {
-    message: "Password must be include unique characters",
-  }),
-});
+interface SigninFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default function SignInForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+const SigninForm: FC<SigninFormProps> = ({ className, children, ...props }) => {
+  const { toast } = useToast();
+  // const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  const loginWithGoogle = async () => {
+    try {
+      await signIn('google');
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'There was an error logging in with google',
+        variant: 'destructive',
+      });
+    }
+  };
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="mail@example.com" {...field}></Input>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="enter your password" {...field}></Input>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Sign In</Button>
-      </form>
-    </Form>
+    <div className="flex flex-col gap-y-32">
+      {/* <UserAuthForm /> */}
+      <div className="flex flex-col gap-y-2 text-center">
+        <h1 className="text-heading">Hi there!👋</h1>
+        <h3 className="text-body">
+          Elevate your online experience. Sign in effortlessly and explore a universe of
+          possibilities.
+        </h3>
+      </div>
+      <div className={cn('flex flex-col justify-center gap-y-4', className)} {...props}>
+        <Button type="button" className="w-full" onClick={loginWithGoogle} variant={'destructive'}>
+          <Mail className="mr-2" /> Sign In With Google
+        </Button>
+      </div>
+    </div>
   );
-}
+};
+
+export default SigninForm;

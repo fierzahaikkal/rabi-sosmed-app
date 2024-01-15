@@ -5,12 +5,27 @@
 @layer base {
   :root {
     /* UI Color */
+    --background: 240 60% 99%;
+    --background-hover: 240 5% 89%;
+    --background-active: 240 2% 79%;
+
     --text: 247 75% 5%;
     --text-light: 246 76% 95%;
-    --background: 240 60% 99%;
+
     --primary: 242 65% 54%;
+    --primary-foreground: 246 76% 95%;
+    --primary-hover: 242 56% 48%;
+    --primary-active: 242 56% 43%;
+
     --secondary: 243 100% 93%;
+    --secondary-foreground: 247 75% 5%;
+    --secondary-hover: 244 39% 84%;
+    --secondary-active: 244 22% 75%;
+
     --accent: 276 75% 49%;
+    --accent-foreground: 246 76% 95%;
+    --accent-hover: 276 75% 44%;
+    --accent-active: 276 75% 39%;
 
     /* shadcn UI */
     --foreground: 222.2 84% 4.9%;
@@ -22,16 +37,13 @@
     --popover-foreground: 222.2 84% 4.9%;
 
     /* --primary: 222.2 47.4% 11.2%; */
-    --primary-foreground: 210 40% 98%;
 
     /* --secondary: 210 40% 96.1%; */
-    --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     /* --accent: 210 40% 96.1%; */
-    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -39,6 +51,8 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+
+    --radius: 8px;
   }
 
   .dark {

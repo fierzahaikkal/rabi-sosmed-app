@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -6,32 +6,32 @@ async function main() {
   // Create users
   const user1 = await prisma.users.create({
     data: {
-      username: "user1",
-      email: "user1@example.com",
-      password_hash: "hashed_password1",
-      profile_image_url: "user1_profile.jpg",
+      username: 'user1',
+      email: 'user1@example.com',
+      password_hash: 'hashed_password1',
+      profile_image_url: 'user1_profile.jpg',
     },
   });
 
   const user2 = await prisma.users.create({
     data: {
-      username: "user2",
-      email: "user2@example.com",
-      password_hash: "hashed_password2",
-      profile_image_url: "user2_profile.jpg",
+      username: 'user2',
+      email: 'user2@example.com',
+      password_hash: 'hashed_password2',
+      profile_image_url: 'user2_profile.jpg',
     },
   });
 
   // Create topics
   const topic1 = await prisma.topics.create({
     data: {
-      name: "Topic 1",
+      name: 'Topic 1',
     },
   });
 
   const topic2 = await prisma.topics.create({
     data: {
-      name: "Topic 2",
+      name: 'Topic 2',
     },
   });
 
@@ -39,7 +39,7 @@ async function main() {
   const post1 = await prisma.posts.create({
     data: {
       users: { connect: { id: user1.id } },
-      content: "Post 1 by user1",
+      content: 'Post 1 by user1',
       topics: { connect: { id: topic1.id } },
     },
   });
@@ -47,7 +47,7 @@ async function main() {
   const post2 = await prisma.posts.create({
     data: {
       users: { connect: { id: user2.id } },
-      content: "Post 1 by user2",
+      content: 'Post 1 by user2',
       topics: { connect: { id: topic2.id } },
     },
   });
@@ -57,7 +57,7 @@ async function main() {
     data: {
       users: { connect: { id: user1.id } },
       posts: { connect: { id: post1.id } },
-      content: "Comment on post 1 by user1",
+      content: 'Comment on post 1 by user1',
     },
   });
 
@@ -65,7 +65,7 @@ async function main() {
     data: {
       users: { connect: { id: user2.id } },
       posts: { connect: { id: post1.id } },
-      content: "Comment on post 1 by user2",
+      content: 'Comment on post 1 by user2',
     },
   });
 
@@ -89,7 +89,7 @@ async function main() {
     data: {
       users: { connect: { id: user1.id } },
       comments: { connect: { id: comment1.id } },
-      content: "Reply to comment 1 by user1",
+      content: 'Reply to comment 1 by user1',
     },
   });
 
@@ -97,11 +97,11 @@ async function main() {
     data: {
       users: { connect: { id: user2.id } },
       comments: { connect: { id: comment2.id } },
-      content: "Reply to comment 2 by user2",
+      content: 'Reply to comment 2 by user2',
     },
   });
 
-  console.log("Seed data created");
+  console.log('Seed data created');
 }
 
 main()
